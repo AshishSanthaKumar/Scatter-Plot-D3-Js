@@ -6,9 +6,9 @@ const height = 470 - margin.top - margin.bottom;
 
 // parse the date / time
 const parseTime = d3.timeParse("%d-%b-%y");
-
+  
 // set the ranges
-const xScale = d3.scaleTime()
+const xScale = d3.scaleLog()
                  .range([0, width]);
 const yScale = d3.scaleLinear()
                   .range([height, 0]);
@@ -18,6 +18,8 @@ const valueline = d3.line()
                     .x(function(d) { return xScale(d.date); })
                     .y(function(d) { return yScale(d.close); });
 
+var color = d3.scaleOrdinal(d3.schemeCategory10)
+
 // append the svg object to the body of the page
 // append a g (group) element to 'svg' and
 // move the g element to the top+left margin
@@ -26,19 +28,21 @@ var svg = d3.select("body").append("svg")
                            .attr("height", height + margin.top + margin.bottom)
                            .append("g")
                            .attr("transform", `translate(${margin.left},${margin.top})`);
+                          
 
 // Get the data
-d3.csv("data/dates.csv").then(data => {
+d3.tsv("data/gapminderDataFiveYear.tsv").then(data => {
 
     // format the data such that strings are converted to their appropriate types
     data.forEach(function(d) {
-        d.date = parseTime(d.date);
-        d.close = +d.close;
+        d.lifeExp = +d.lifeExp;
+        d.gdpPercap = +d.gdpPercap;
+        d.year = +d.year;
     });
 
     // Set scale domains based on the loaded data
-    xScale.domain(d3.extent(data, function(d) { return d.date; }));
-    yScale.domain([0, d3.max(data, function(d) { return d.close; })]);
+    xScale.domain(d3.extent(data, function(d) { return d.gdpPercap; }));
+    yScale.domain([d3.min(data, function(d) { return d.lifeExp; }),d3.max(data, function(d) { return d.lifeExp; })]);
 
     // Add the valueline
     svg.append("path")
@@ -50,9 +54,12 @@ d3.csv("data/dates.csv").then(data => {
     svg.selectAll("dot")
         .data(data)
         .enter().append("circle")
+        .filter(function(d) { return d['year'] == 2007 || d['year'] == 1952;})
         .attr("r", 5)
-        .attr("cx", function(d) { return xScale(d.date); })
-        .attr("cy", function(d) { return yScale(d.close); });
+        .attr("cx", function(d) { return xScale(d.gdpPercap); })
+        .attr("cy", function(d) { return yScale(d.lifeExp); })
+        .style("fill", function(d) { return color(d.year); });
+        
     
     // Add the axes
     const yAxis = d3.axisLeft(yScale);
