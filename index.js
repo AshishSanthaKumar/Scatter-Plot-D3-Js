@@ -78,7 +78,7 @@ d3.tsv("data/gapminderDataFiveYear.tsv").then(data => {
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
 
-});
+    });
 
     
 
