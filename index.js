@@ -38,6 +38,7 @@ d3.tsv("data/gapminderDataFiveYear.tsv").then(data => {
         d.lifeExp = +d.lifeExp;
         d.gdpPercap = +d.gdpPercap;
         d.year = +d.year;
+        d.pop = +d.pop;
     });
 
     // Set scale domains based on the loaded data
@@ -58,7 +59,9 @@ d3.tsv("data/gapminderDataFiveYear.tsv").then(data => {
         .attr("r", 5)
         .attr("cx", function(d) { return xScale(d.gdpPercap); })
         .attr("cy", function(d) { return yScale(d.lifeExp); })
-        .style("fill", function(d) { return color(d.year); });
+        .style("fill", function(d) { return color(d.year); })
+        .style("opacity", 0.8);
+        
         
     
     // Add the axes
