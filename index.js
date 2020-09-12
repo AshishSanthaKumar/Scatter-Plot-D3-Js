@@ -67,8 +67,7 @@ d3.tsv("data/gapminderDataFiveYear.tsv").then(data => {
         .style("fill", function(d) { return color(d.year); })
         .style("opacity", 0.8);
         
-        
-    
+ 
     // Add the axes
     const yAxis = d3.axisLeft(yScale);
     
@@ -104,7 +103,7 @@ d3.tsv("data/gapminderDataFiveYear.tsv").then(data => {
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis)
         .render();
-    
+        
     });
 
     
