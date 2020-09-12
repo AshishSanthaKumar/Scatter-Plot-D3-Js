@@ -71,16 +71,40 @@ d3.tsv("data/gapminderDataFiveYear.tsv").then(data => {
     
     // Add the axes
     const yAxis = d3.axisLeft(yScale);
+    
+    svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x", 0 - (height/1.65))
+        .attr("dy", "1em")
+        .style("sans-serif", "middle")
+        .text("Life Expectancy")
+        .style("font-size","14px")
+        .style("font-weight","700");   
+
     svg.append("g")
         .call(yAxis);
+        
     const xAxis = d3.axisBottom(xScale)
         .tickValues([300,400,1000,2000,3000,4000,10000,20000,30000,40000,100000])
         .ticks(11)
         .tickFormat(d3.format(".0s"));
+    
+
+    svg.append("text")         
+        .attr("transform",
+              "translate(" + (width/2.25) + " ," + 
+                             (height + margin.top + 30) + ")")
+        .style("sans-serif", "middle")
+        .text("GDP per Capita")
+        .style("font-size","14px")
+        .style("font-weight","700");
+    
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis)
         .render();
+    
     });
 
     
