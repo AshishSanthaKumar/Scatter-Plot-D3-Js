@@ -45,9 +45,9 @@ d3.tsv("data/gapminderDataFiveYear.tsv").then(data => {
         .range([4,10]);    
 
     // Set scale domains based on the loaded data
-    xScale.domain(d3.extent(data, function(d) { return d.gdpPercap; }));
+    //xScale.domain(d3.extent(data, function(d) { return d.gdpPercap; }));
     yScale.domain([d3.min(data, function(d) { return d.lifeExp; }),d3.max(data, function(d) { return d.lifeExp; })]);
-
+    xScale.domain([d3.min(data, function(d) { return d.gdpPercap; }),d3.max(data, function(d) { return d.gdpPercap; })]);
     // Add the valueline
     svg.append("path")
         .data([data])
@@ -73,11 +73,14 @@ d3.tsv("data/gapminderDataFiveYear.tsv").then(data => {
     const yAxis = d3.axisLeft(yScale);
     svg.append("g")
         .call(yAxis);
-    const xAxis = d3.axisBottom(xScale);
+    const xAxis = d3.axisBottom(xScale)
+        .tickValues([300,400,1000,2000,3000,4000,10000,20000,30000,40000,100000])
+        .ticks(11)
+        .tickFormat(d3.format(".0s"));
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
-
+        .call(xAxis)
+        .render();
     });
 
     
