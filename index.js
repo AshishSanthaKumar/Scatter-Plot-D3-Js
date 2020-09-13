@@ -48,15 +48,29 @@ svg.append("text")
     .attr("x", 710)
     .attr("y", 23)
     .text("1952")
-    .style("font-size", "15px")
+    .style("font-size", "11px")
+    .style("font-family","sans-serif")
     .attr("alignment-baseline","middle");
 
 svg.append("text")
     .attr("x", 710)
     .attr("y", 53)
     .text("2007")
-    .style("font-size", "15px")
+    .style("font-size", "11px")
+    .style("font-family","sans-serif")
     .attr("alignment-baseline","middle");
+
+//Adding a Title
+
+svg.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 2)
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("font-family","sans-serif")
+        .style("font-weight","700")
+        .style("text-decoration", "underline")  
+        .text("GDP vs Life Expectancy (1952, 2007)");
 
 
 // Get the data
