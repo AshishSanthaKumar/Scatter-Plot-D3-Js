@@ -27,7 +27,37 @@ var svg = d3.select(".center").append("svg")
                            .attr("width", width + margin.left + margin.right)
                            .attr("height", height + margin.top + margin.bottom)
                            .append("g")
-                           .attr("transform", `translate(${margin.left},${margin.top})`);                 
+                           .attr("transform", `translate(${margin.left},${margin.top})`);    
+
+//Adding Legend
+svg.append('rect')
+    .attr("x",670)
+    .attr("y",10)
+    .attr("height",20)
+    .attr("width",30)
+    .style("fill", '#1f77b4');
+
+svg.append('rect')
+    .attr("x",670)
+    .attr("y",40)
+    .attr("height",20)
+    .attr("width",30)
+    .style("fill", '#ff7f0e');
+
+svg.append("text")
+    .attr("x", 710)
+    .attr("y", 23)
+    .text("1952")
+    .style("font-size", "15px")
+    .attr("alignment-baseline","middle");
+
+svg.append("text")
+    .attr("x", 710)
+    .attr("y", 53)
+    .text("2007")
+    .style("font-size", "15px")
+    .attr("alignment-baseline","middle");
+
 
 // Get the data
 d3.tsv("data/gapminderDataFiveYear.tsv").then(data => {
@@ -89,7 +119,7 @@ d3.tsv("data/gapminderDataFiveYear.tsv").then(data => {
         .ticks(11)
         .tickFormat(d3.format(".0s"));
     
-
+    
     svg.append("text")         
         .attr("transform",
               "translate(" + (width/2.25) + " ," + 
@@ -103,12 +133,12 @@ d3.tsv("data/gapminderDataFiveYear.tsv").then(data => {
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis)
         .render();
+
+
         
     });
 
     
-
-
 
 
 
