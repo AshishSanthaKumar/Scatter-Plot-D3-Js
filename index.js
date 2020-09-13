@@ -80,7 +80,7 @@ d3.tsv("data/gapminderDataFiveYear.tsv").then(data => {
     data.forEach(function(d) {
         d.lifeExp = +d.lifeExp;
         d.gdpPercap = +d.gdpPercap;
-        d.year = +d.year;
+        d.year = +d.year
         d.pop = +d.pop;
     });
   
