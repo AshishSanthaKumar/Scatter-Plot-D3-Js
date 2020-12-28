@@ -74,7 +74,7 @@ svg.append("text")
 
 
 // Get the data
-d3.tsv('https://raw.githubusercontent.com/AshishSanthaKumar/Scatter-Plot-D3-Js/master/data/gapminderDataFiveYear.tsv').then(data => {
+d3.tsv("https://raw.githubusercontent.com/AshishSanthaKumar/Scatter-Plot-D3-Js/master/public/data/gapminderDataFiveYear.tsv").then(data => {
 
     // format the data such that strings are converted to their appropriate types
     data.forEach(function(d) {
